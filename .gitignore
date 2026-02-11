@@ -37,7 +37,16 @@ build/
 .DS_Store
 Thumbs.db
 
-# Uploads and data
+# Backend data directories (generated/uploaded content)
+vton-manager/backend/thumbnails/
+vton-manager/backend/uploads/
+vton-manager/backend/extracted/
+vton-manager/backend/*.db
+vton-manager/backend/*.sqlite
+vton-manager/backend/*.sqlite3
+
+# Legacy data
 uploads/
 extracted/
+thumbnails/
 *.db
