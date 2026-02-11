@@ -1,0 +1,205 @@
+[
+  {
+    "product_id": "7725025722419",
+    "image_filename": "cropped_1770707323.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725025722419_cropped_1770707323.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725025198131",
+    "image_filename": "cropped_1770707779.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725025198131_cropped_1770707779.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725024903219",
+    "image_filename": "cropped_1770708245.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725024903219_cropped_1770708245.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725024378931",
+    "image_filename": "cropped_1770708631.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725024378931_cropped_1770708631.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725024182323",
+    "image_filename": "cropped_1770708639.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725024182323_cropped_1770708639.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725023887411",
+    "image_filename": "cropped_1770708643.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725023887411_cropped_1770708643.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725023625267",
+    "image_filename": "cropped_1770708647.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725023625267_cropped_1770708647.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725023297587",
+    "image_filename": "cropped_1770708652.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725023297587_cropped_1770708652.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725022937139",
+    "image_filename": "cropped_1770709243.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725022937139_cropped_1770709243.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725022773299",
+    "image_filename": "cropped_1770709248.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725022773299_cropped_1770709248.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725022478387",
+    "image_filename": "cropped_1770709252.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725022478387_cropped_1770709252.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725022216243",
+    "image_filename": "cropped_1770709256.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725022216243_cropped_1770709256.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725021921331",
+    "image_filename": "cropped_1770709260.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725021921331_cropped_1770709260.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725021364275",
+    "image_filename": "cropped_1770709265.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725021364275_cropped_1770709265.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725011271731",
+    "image_filename": "cropped_1770709272.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725011271731_cropped_1770709272.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725011140659",
+    "image_filename": "cropped_1770709275.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725011140659_cropped_1770709275.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010944051",
+    "image_filename": "cropped_1770709279.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010944051_cropped_1770709279.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010649139",
+    "image_filename": "cropped_1770709283.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010649139_cropped_1770709283.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010583603",
+    "image_filename": "cropped_1770709288.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010583603_cropped_1770709288.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010550835",
+    "image_filename": "cropped_1770709292.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010550835_cropped_1770709292.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010518067",
+    "image_filename": "cropped_1770709295.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010518067_cropped_1770709295.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010452531",
+    "image_filename": "cropped_1770709298.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010452531_cropped_1770709298.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010419763",
+    "image_filename": "cropped_1770709306.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010419763_cropped_1770709306.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010386995",
+    "image_filename": "cropped_1770709313.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010386995_cropped_1770709313.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010288691",
+    "image_filename": "cropped_1770709316.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010288691_cropped_1770709316.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010190387",
+    "image_filename": "cropped_1770709319.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010190387_cropped_1770709319.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010124851",
+    "image_filename": "cropped_1770709322.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010124851_cropped_1770709322.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725010059315",
+    "image_filename": "cropped_1770709326.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725010059315_cropped_1770709326.png",
+    "is_cropped": false
+  },
+  {
+    "product_id": "7725009993779",
+    "image_filename": "cropped_1770709330.png",
+    "status": "approved",
+    "processed_image_path": "processed_7725009993779_cropped_1770709330.png",
+    "is_cropped": false
+  }
+]
