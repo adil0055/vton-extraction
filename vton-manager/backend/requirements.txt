@@ -3,4 +3,5 @@ uvicorn
 pandas
 requests
 python-multipart
-shutil
+boto3
+pillow

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { fetchQueue, fetchProduct, processImage, approveImage, discardImage, getImageUrl, getProcessedImageUrl } from '../api';
-import { Play, CheckCircle, Loader2, Check, Trash2 } from 'lucide-react';
+import { fetchQueue, fetchProduct, processImage, approveImage, discardImage, getImageUrl, getProcessedImageUrl, clearApprovedQueue } from '../api';
+import { Play, CheckCircle, Loader2, Check, Trash2, Upload, ExternalLink } from 'lucide-react';
+import UploadModal from './UploadModal';
 
 const ExtractionQueue = () => {
     const [queue, setQueue] = useState([]);
     const [products, setProducts] = useState({});
+
+    // Upload modal state
+    const [uploadModalItem, setUploadModalItem] = useState(null);
+    const [uploadModalProduct, setUploadModalProduct] = useState(null);
 
     useEffect(() => {
         loadQueue();
@@ -49,8 +54,6 @@ const ExtractionQueue = () => {
 
     const handleApprove = async (item) => {
         try {
-            // processed_image_path is usually just filename in current backend implementation?
-            // Wait, main.py: item.processed_image_path = processed_filename
             const processedFilename = item.processed_image_path || `processed_${item.product_id}_${item.image_filename}`;
             await approveImage(item.product_id, item.image_filename, processedFilename);
             loadQueue();
@@ -58,6 +61,40 @@ const ExtractionQueue = () => {
             console.error("Approval failed", error);
             alert("Failed to approve image");
         }
+    };
+
+    const handleApproveAndUpload = (item) => {
+        // First approve, then show upload modal
+        const product = products[item.product_id];
+        setUploadModalItem(item);
+        setUploadModalProduct({
+            ...product,
+            image_filename: item.image_filename,
+        });
+    };
+
+    const handleUploadAfterApproval = async () => {
+        // If item is completed but not yet approved, approve first
+        const item = uploadModalItem;
+        if (item && item.status === 'completed') {
+            try {
+                const processedFilename = item.processed_image_path || `processed_${item.product_id}_${item.image_filename}`;
+                await approveImage(item.product_id, item.image_filename, processedFilename);
+                loadQueue();
+            } catch (error) {
+                console.error("Background approval failed", error);
+            }
+        }
+    };
+
+    // Open upload modal for already-approved items
+    const handleUploadApproved = (item) => {
+        const product = products[item.product_id];
+        setUploadModalItem(item);
+        setUploadModalProduct({
+            ...product,
+            image_filename: item.image_filename,
+        });
     };
 
     const handleDiscard = async (item) => {
@@ -82,27 +119,67 @@ const ExtractionQueue = () => {
 
     return (
         <div className="space-y-6">
+            {/* Upload Modal */}
+            {uploadModalItem && uploadModalProduct && (
+                <UploadModal
+                    product={uploadModalProduct}
+                    processedImageUrl={
+                        getProcessedImageUrl(
+                            uploadModalItem.processed_image_path || `processed_${uploadModalItem.product_id}_${uploadModalItem.image_filename}`
+                        ) + `?t=${Date.now()}`
+                    }
+                    onClose={() => {
+                        setUploadModalItem(null);
+                        setUploadModalProduct(null);
+                    }}
+                    onSuccess={async (result) => {
+                        // Approve image in the background if not already
+                        await handleUploadAfterApproval();
+                        loadQueue();
+                    }}
+                />
+            )}
+
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-gray-800">Extraction Queue</h2>
-                <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
-                    <button
-                        onClick={() => setActiveTab('queue')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'queue'
-                            ? 'bg-white text-gray-900 shadow'
-                            : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                    >
-                        Queue ({queue.filter(i => i.status !== 'approved').length})
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('approved')}
-                        className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'approved'
-                            ? 'bg-white text-gray-900 shadow'
-                            : 'text-gray-500 hover:text-gray-700'
-                            }`}
-                    >
-                        Approved ({queue.filter(i => i.status === 'approved').length})
-                    </button>
+                <div className="flex items-center gap-3">
+                    {activeTab === 'approved' && queue.filter(i => i.status === 'approved').length > 0 && (
+                        <button
+                            onClick={async () => {
+                                if (!confirm('Clear all approved items? This cannot be undone.')) return;
+                                try {
+                                    await clearApprovedQueue();
+                                    loadQueue();
+                                } catch (err) {
+                                    console.error('Failed to clear approved', err);
+                                    alert('Failed to clear approved items');
+                                }
+                            }}
+                            className="px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 flex items-center gap-2 text-sm font-medium transition-colors"
+                        >
+                            <Trash2 size={16} /> Clear All
+                        </button>
+                    )}
+                    <div className="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                        <button
+                            onClick={() => setActiveTab('queue')}
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'queue'
+                                ? 'bg-white text-gray-900 shadow'
+                                : 'text-gray-500 hover:text-gray-700'
+                                }`}
+                        >
+                            Queue ({queue.filter(i => i.status !== 'approved').length})
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('approved')}
+                            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'approved'
+                                ? 'bg-white text-gray-900 shadow'
+                                : 'text-gray-500 hover:text-gray-700'
+                                }`}
+                        >
+                            Approved ({queue.filter(i => i.status === 'approved').length})
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -200,15 +277,29 @@ const ExtractionQueue = () => {
                                             </button>
                                             <button
                                                 onClick={() => handleApprove(item)}
-                                                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2 text-sm font-medium"
+                                                className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 flex items-center gap-2 text-sm font-medium"
                                             >
-                                                <Check size={16} /> Approve
+                                                <Check size={16} /> Approve Only
+                                            </button>
+                                            <button
+                                                onClick={() => handleApproveAndUpload(item)}
+                                                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 flex items-center gap-2 text-sm font-medium shadow-md"
+                                            >
+                                                <Upload size={16} /> Approve & Upload
                                             </button>
                                         </>
                                     )}
                                     {item.status === 'approved' && (
-                                        <div className="flex items-center gap-2 text-blue-600 text-sm font-medium">
-                                            <CheckCircle size={18} /> Approved & Saved
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex items-center gap-2 text-blue-600 text-sm font-medium">
+                                                <CheckCircle size={18} /> Approved
+                                            </div>
+                                            <button
+                                                onClick={() => handleUploadApproved(item)}
+                                                className="px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 flex items-center gap-2 text-sm font-medium shadow-md"
+                                            >
+                                                <Upload size={16} /> Upload to Catalogue
+                                            </button>
                                         </div>
                                     )}
                                 </div>

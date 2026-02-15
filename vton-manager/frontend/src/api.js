@@ -65,3 +65,35 @@ export const uploadCroppedImage = async (productId, blob) => {
     });
     return response.data;
 };
+
+export const uploadCatalogue = async (formData) => {
+    const response = await axios.post(`${API_BASE_URL}/catalogues/upload`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return response.data;
+};
+
+export const fetchClients = async () => {
+    const response = await axios.get(`${API_BASE_URL}/clients`);
+    return response.data;
+};
+
+export const fetchClientLocations = async (clientId) => {
+    const response = await axios.get(`${API_BASE_URL}/clients/${clientId}/locations`);
+    return response.data;
+};
+
+export const clearApprovedQueue = async () => {
+    const response = await axios.delete(`${API_BASE_URL}/queue/approved`);
+    return response.data;
+};
+
+export const uploadSingleProduct = async (payload) => {
+    const response = await axios.post(`${API_BASE_URL}/catalogue/upload-single`, payload, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 120000, // 2 min timeout for large uploads
+    });
+    return response.data;
+};
